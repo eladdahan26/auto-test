@@ -42,6 +42,9 @@ test('Filling out a form and selecting buttons after clicking on apps and videos
 
     //Validtae the video details appear in the signature
     await videoPage.detailsValidation('https://www.youtube.com/watch?v=F7rFmAn_HF0', '13px');
+
+    //Closing website
+    await page.close()
 });
 
 
