@@ -5,7 +5,11 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
-
+    # הרצה אוטומטית בשעה 09:00 ו־18:00 כל יום (UTC)
+  schedule:
+    - cron: '0 9,18 * * *'
+  # הפעלה ידנית דרך GitHub Actions
+  workflow_dispatch:
 jobs:
   test:
     timeout-minutes: 60
@@ -34,7 +38,7 @@ jobs:
           retention-days: 30
 
   deploy-report:
-    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && github.event_name == 'push'
+    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
     needs: [test]
     runs-on: ubuntu-latest
     permissions:
