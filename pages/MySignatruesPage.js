@@ -22,6 +22,7 @@ export class MySignatruesPage extends BasePage{
         this.other_radio = '.radio-btn-wrapper .radio-btn';
         this.textFieldDelete = '[class*="ws-input"][class*="ws-input-v2"] input';
         this.last_deleteButton = '.ws-btn-alert .ws-btn-content-slot';
+        this.logout_button = '.sw-icon-logout';
     };
 
     async editMySignatrue(){
@@ -39,6 +40,10 @@ export class MySignatruesPage extends BasePage{
     async clickOnRenameButton(){
         await this.click(this.renameButton);
     };
+
+    async clickOnLogoutButton(){
+        await this.click(this.logout_button);
+    }
 
     async ChangeSignatureTitleInPopup(){
         const currentSigName = await this.page.locator(this.sigName).innerText();
