@@ -26,13 +26,14 @@ export class CreateaAccountPage extends BasePage {
         await this.navigat(this.url);
     };
 
-    async createAnAccount(email,name , password){
+    async createAnAccount(email, name , password){
         await this.click(this.signInButton);
         await this.click(this.create_button);
         await this.waitForSeconds(1);
         await this.fill(this.email_textField, email);
         await this.fill(this.name_textField, name);
         await this.fill(this.password_textField, password);
+        await this.waitForSeconds(1);
         await this.click(this.signUp_button);
         await this.click(this.numberOfEmployeesButtoninTheCompany);
         await this.click(this.continue_button_afterNumber);
