@@ -22,6 +22,7 @@ export class MySignatruesPage extends BasePage{
         this.other_radio = '.radio-btn-wrapper .radio-btn';
         this.textFieldDelete = '[class*="ws-input"][class*="ws-input-v2"] input';
         this.last_deleteButton = '.ws-btn-alert .ws-btn-content-slot';
+        this.logoutButton = '.sw-icon-logout';
     };
 
     async editMySignatrue(){
@@ -58,6 +59,11 @@ export class MySignatruesPage extends BasePage{
         const currentSigName = await this.page.locator(this.sigName).innerText();
         await this.expectToBeVisible(this.greenMessage);
         await this.expectToHaveText(this.textGreenMessage, `Signature has been renamed to ${currentSigName}!`);
+    };
+
+    async clickOnLogoutButton(){
+        await this.click(this.user_button);
+        await this.click(this.logoutButton);
     };
 
     async navigateToProfilePage(){
