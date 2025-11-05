@@ -1,0 +1,94 @@
+# Test info
+
+- Name: Deleting a user and creating a new user
+- Location: /home/runner/work/auto-test/auto-test/tests/test-deletingAndCreatingUser.spec.js:10:5
+
+# Error details
+
+```
+Error: page.goto: net::ERR_ABORTED at https://webapp.qa5.wisestamp-dev.com/editor
+Call log:
+  - navigating to "https://webapp.qa5.wisestamp-dev.com/editor", waiting until "load"
+
+    at LoginPage.navigat (/home/runner/work/auto-test/auto-test/pages/BasePage.js:10:25)
+    at LoginPage.navigatToLogin (/home/runner/work/auto-test/auto-test/pages/LoginPage.js:19:20)
+    at /home/runner/work/auto-test/auto-test/tests/test-deletingAndCreatingUser.spec.js:39:21
+```
+
+# Test source
+
+```ts
+   1 | import { test, expect } from '@playwright/test';
+   2 |
+   3 | export class BasePage {
+   4 |
+   5 |     constructor(page){
+   6 |         this.page = page;
+   7 |     };
+   8 |
+   9 |     async navigat(url){
+> 10 |         await this.page.goto(url);
+     |                         ^ Error: page.goto: net::ERR_ABORTED at https://webapp.qa5.wisestamp-dev.com/editor
+  11 |     };
+  12 |
+  13 |     async click(selector){
+  14 |         await this.page.click(selector);
+  15 |     };
+  16 |
+  17 |     async clickByText(selector, text) {
+  18 |         await this.page.locator(selector).filter({ hasText: text }).click();
+  19 |     };
+  20 |
+  21 |     async fill(selector, value){
+  22 |         await this.page.fill(selector, value);
+  23 |     };
+  24 |
+  25 |     async getText(selector){
+  26 |         await this.page.locator(selector).textContent();
+  27 |     };
+  28 |
+  29 |     async getAttribute(selector, attribute){
+  30 |         return await this.page.locator(selector).getAttribute(attribute);
+  31 |     };
+  32 |
+  33 |     async expectToContainText(selector, text){
+  34 |         await expect(this.page.locator(selector)).toContainText(text);
+  35 |     };
+  36 |
+  37 |     async expectToBeVisible(selector) {
+  38 |         await expect(this.page.locator(selector)).toBeVisible({timeout: 10000 });
+  39 |     };
+  40 |
+  41 |     async expectToNotBeVisible(selector) {
+  42 |         await expect(this.page.locator(selector)).not.toBeVisible({timeout: 10000 });
+  43 |     };
+  44 |
+  45 |     async expectToHaveText(selector, value){
+  46 |         await expect(this.page.locator(selector)).toHaveText(value)
+  47 |     };
+  48 |     
+  49 |     async waitForSeconds(seconds) {
+  50 |         await this.page.waitForTimeout(seconds * 1000);
+  51 |     };
+  52 |
+  53 |     async clickByRole(role, options = {}) {
+  54 |         await this.page.getByRole(role, options).click();
+  55 |     };
+  56 |
+  57 |     async clickByIndex(selector, index) {
+  58 |         await this.page.locator(selector).nth(index).click();
+  59 |     };
+  60 |
+  61 |     async fillByIndex(selector, index, value) {
+  62 |         await this.page.locator(selector).nth(index).fill(value);
+  63 |     };
+  64 |
+  65 |     async check(selector){
+  66 |         await this.page.check(selector);
+  67 |     };
+  68 |
+  69 |     async clickByRoleAndName(role, name) {
+  70 |         await this.page.getByRole(role, { name: name }).click();
+  71 |     };
+  72 | };
+```
